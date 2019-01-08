@@ -1,33 +1,42 @@
 <template>
-  <v-app>
-    <v-toolbar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
+  <v-app id="app">
+    <v-container fluid id="comtainer">
+      <v-layout column fill-height>
+        <v-flex sm1 md1 >
+        </v-flex>
+        <v-flex sm10 md10 >
+          <v-layout row fill-height>
+            <v-flex md2 class="hidden-sm-and-down" >
+              <Left/>
+            </v-flex>
+            <v-flex sm12 md8 >
+              <router-view></router-view>
+            </v-flex>
+            <v-flex md2 class="hidden-sm-and-down">
+              <Right />
+            </v-flex>
+          </v-layout>
+        </v-flex>
+        <v-flex md1 >  
+        </v-flex>
+      </v-layout>
+      <v-btn fab fixed bottom right icon>
+        <v-icon>search</v-icon>
       </v-btn>
-    </v-toolbar>
-
-    <v-content>
-      <HelloWorld/>
-    </v-content>
+    </v-container>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+
+import Left from './views/Left.vue'
+import Right from './views/Right.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Left,
+    Right
   },
   data () {
     return {
@@ -36,3 +45,14 @@ export default {
   }
 }
 </script>
+
+<style lang="less" scoped>
+#app{
+  background-image: url("assets/bgCybernet.jpg");
+  .container{
+    padding: 0em;
+    margin : 0em;
+  }
+}
+</style>
+
