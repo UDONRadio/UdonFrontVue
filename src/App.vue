@@ -21,7 +21,7 @@
         </v-flex>
       </v-layout>
       <v-btn fab fixed bottom right icon>
-        <v-icon>search</v-icon>
+        <v-icon>account_circle</v-icon>
       </v-btn>
     </v-container>
   </v-app>

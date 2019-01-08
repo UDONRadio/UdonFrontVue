@@ -6,17 +6,17 @@
                     <v-flex xs4 id="logo">
                         Logo
                     </v-flex>
-                    <v-flex xs2>
+                    <v-flex xs2 id="player">
                         Play/Pause
                     </v-flex>
                     <v-flex xs6>
-                        <v-layout column fluid fill-height>
-                            <v-flex xs6>
+                        <v-layout column fluid fill-height id="player_info">
+                            <v-flex xs6 style="border-bottom: 1px solid black;">
                                 Métadonnées
                             </v-flex>
                             <v-flex xs6>
                                 <v-layout row fluid fill-height>
-                                    <v-flex xs6>
+                                    <v-flex xs6 style="border-right: 1px solid black;">
                                         Volume
                                     </v-flex>
                                     <v-flex xs6>
@@ -51,10 +51,17 @@
 <style lang="less" scoped>
 #home{
     #navbar{
+        #player{
+            border-right: 1px solid black;
+        }
         margin-bottom: 1em;
         .flex{
             background-color: white;
-            border: 1px solid black;
+        }
+        #player_info{
+            .flex{
+                padding: 5px;
+            }
         }
         #logo{
             margin-right: 1em;
@@ -64,7 +71,6 @@
     #Corp{
         .flex{
             background-color: white;
-            border: 1px solid black;
         }
         #InfoBox{
             margin-right: 1em;
