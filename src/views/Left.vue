@@ -7,7 +7,11 @@
             <v-flex xs2>
                 <v-layout row fill-height >
                     <v-flex xs8 offset-xs3 id="Calendar">
-                        Calendrier
+                        <v-card href="/replays" hover elevation="23" color="green">
+                            <v-card-title>
+                                Calendrier
+                            </v-card-title>
+                        </v-card>
                     </v-flex>
                 </v-layout>
             </v-flex>
@@ -17,7 +21,11 @@
             <v-flex xs2>
                 <v-layout row  fill-height >
                     <v-flex xs10 offset-xs1 id="About">
-                        A propos
+                        <v-card href="/replays" hover elevation="23" color="red">
+                            <v-card-title>
+                                A propos
+                            </v-card-title>
+                        </v-card>
                     </v-flex>
                 </v-layout>
             </v-flex>
@@ -47,10 +55,6 @@ export default {
     #Calendar{
         margin-right: 1em;
         margin-top: -1em;
-        background-color: aquamarine;
-    }
-    #About{
-        background-color: aquamarine;
     }
 }
 </style>

@@ -7,7 +7,11 @@
             <v-flex xs2>
                 <v-layout row fill-height >
                     <v-flex xs8 offset-xs2 id="Replays">
-                        replays
+                        <v-card href="/replays" hover elevation="23" color="blue">
+                            <v-card-title>
+                                Replays
+                            </v-card-title>
+                        </v-card>
                     </v-flex>
                 </v-layout>
             </v-flex>
@@ -17,7 +21,11 @@
             <v-flex xs2>
                 <v-layout row  fill-height >
                     <v-flex xs4 offset-xs4 id="Recre">
-                        Cloche pour déclencher la récré  
+                        <v-card href="/replays" hover elevation="23" color="purple">
+                            <v-card-title>
+                               Cloche pour la recre
+                            </v-card-title>
+                        </v-card>
                     </v-flex>
                 </v-layout>
             </v-flex>
@@ -44,11 +52,6 @@ export default {
 
 <style lang="less" scoped>
 #Right{
-    #Recre{
-        background-color: chocolate;
-    }
-    #Replays{
-        background-color: brown;
-    }
+
 }
 </style>
