@@ -1,82 +1,36 @@
 <template>
-    <v-container fill-height id="home">
-        <v-layout column fluid>
-            <v-flex md2 id="navbar">
-                <v-layout row fluid fill-height>
-                    <v-flex xs4 id="logo">
-                        Logo
-                    </v-flex>
-                    <v-flex xs2 id="player">
-                        Play/Pause
-                    </v-flex>
-                    <v-flex xs6>
-                        <v-layout column fluid fill-height id="player_info">
-                            <v-flex xs6 style="border-bottom: 1px solid black;">
-                                Métadonnées
-                            </v-flex>
-                            <v-flex xs6>
-                                <v-layout row fluid fill-height>
-                                    <v-flex xs6 style="border-right: 1px solid black;">
-                                        Volume
-                                    </v-flex>
-                                    <v-flex xs6>
-                                        Type
-                                    </v-flex>
-                                </v-layout>
-                            </v-flex>
-                        </v-layout>
-                    </v-flex>
-                </v-layout>
-            </v-flex>
-            <v-flex md10 id="Corp">
-                <v-layout row fluid fill-height>
-                    <v-flex xs6 id="InfoBox">
-                        Infobox
-                    </v-flex>
-                    <v-flex xs6>
-                        Chat
-                    </v-flex>
-                </v-layout>
-            </v-flex>
-        </v-layout>
-    </v-container>
+  <v-layout row fill-height align-space-around justify-space-around id="home">
+    <v-flex md3 mr-3>
+      <left/>
+    </v-flex>
+    <v-flex md9  ma-0>
+      <Center/>
+    </v-flex>
+    <v-flex md3 ml-3>
+      <right/>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
-    export default {
-        
-    }
+import Center from './Center.vue'
+import left from '../components/left.vue'
+import right from '../components/right.vue'
+
+export default {
+  name: 'Home',
+  components: {
+    Center,
+    left,
+    right
+  }
+}
 </script>
 
-<style lang="less" scoped>
+<style scoped lang="less">
 #home{
-    #navbar{
-        #player{
-            border-right: 1px solid black;
-        }
-        margin-bottom: 1em;
-        .flex{
-            background-color: white;
-        }
-        #player_info{
-            .flex{
-                padding: 5px;
-            }
-        }
-        #logo{
-            margin-right: 1em;
-            text-align: center;
-        }
-    }
-    #Corp{
-        .flex{
-            background-color: white;
-        }
-        #InfoBox{
-            margin-right: 1em;
-            text-align: center;
-        }
-    }
-
+  width: 100%;
+  background: url('../assets/pâtes (haut).svg') top left no-repeat fixed ,url('../assets/pâtes (bas).svg') no-repeat bottom left fixed ,url('../assets/bol.svg') no-repeat  bottom right fixed;
+  background-size: 37% , 70% 20% , 30%;
 }
 </style>
