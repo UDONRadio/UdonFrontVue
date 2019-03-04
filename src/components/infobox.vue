@@ -19,7 +19,7 @@ export default {
   border: cadetblue 2px solid;
   border-radius: 2%;
   #textbox{
-    max-height: 45vh;
+    max-height: 55vh;
     overflow-y:auto;
   }
 }

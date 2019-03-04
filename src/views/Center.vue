@@ -1,10 +1,10 @@
 <template>
   <v-layout column fill-height justify-start >
-    <v-flex mb-0 mt-5 md3>
+    <v-flex ma-0 md3>
       <navbar/>
     </v-flex>
-    <v-flex md6 >
-      <v-layout row fill-height justify-space-between>
+    <v-flex md6 ma-0>
+      <v-layout row fill-height shrink justify-space-between>
         <v-flex md5 pr-5>
           <infobox/>
         </v-flex>
@@ -14,11 +14,7 @@
       </v-layout>
     </v-flex>
     <v-flex md3>
-      <v-layout row fill-height justify-space-between>
-        <v-flex md offset-md8 >
-          <recre/>
-        </v-flex>
-      </v-layout>
+      <recre/>
     </v-flex>
   </v-layout>
 </template>
@@ -40,6 +36,7 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+.flex{
+}
 </style>

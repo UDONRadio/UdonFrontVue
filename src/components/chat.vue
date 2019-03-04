@@ -1,19 +1,100 @@
 <template>
-  <v-layout fill-height id="chat">
-    <v-flex md12>
-      un deux test du chat
+  <v-layout fill-height column id="chat" ma-0 pa-0>
+    <v-flex md10 id="chatbox">
+      <v-list two-line>
+        <template v-for="item in messages" >
+          <v-list-tile
+            :key="item.auteur"
+          >
+            <v-list-tile-content style="text-align: right;">
+              <v-list-tile-title style="color:purple;">
+                {{item.auteur}}
+              </v-list-tile-title>
+                {{item.text}}
+            </v-list-tile-content>
+          </v-list-tile>
+        </template>
+      </v-list>
+    </v-flex>
+    <v-flex md2>
+      <v-text-field
+        label="Subject"
+        v-model="message"
+        placeholder="Vasy exprime toi "
+        single-line
+        full-width
+        hide-details
+        append-icon="send"
+        @click:append="test"
+      ></v-text-field>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
 export default {
-  name: 'chat'
+  name: 'chat',
+  data: () => {
+    return {
+      message: '',
+      user:'Jean-mimi',
+      messages: [
+        {
+          auteur: 'Jean-mimi',
+          text: 'salut les potes'
+        },
+        {
+          auteur: 'Test',
+          text: 'je suis un robot bip bip boup'
+        },
+        {
+          auteur: 'Test',
+          text: 'je suis un robot bip bip boup'
+        },
+        {
+          auteur: 'Test',
+          text: 'je suis un robot bip bip boup'
+        },
+        {
+          auteur: 'Test',
+          text: 'je suis un robot bip bip boup'
+        },
+        {
+          auteur: 'Test',
+          text: 'je suis un robot bip bip boup'
+        },
+        {
+          auteur: 'Test',
+          text: 'je suis un robot bip bip boup'
+        },
+        {
+          auteur: 'Test',
+          text: 'je suis un robot bip bip boup'
+        },
+        {
+          auteur: 'Test',
+          text: 'je suis un robot bip bip boup'
+        }
+      ]
+    }
+  },
+  methods: {
+    test () {
+      alert(`promis le message "${this.message}" ete envoye`)
+    }
+  }
 }
 </script>
 
 <style scoped lang="less">
 #chat{
-  background-color: cadetblue;
+  background-color: white;
+  border: cadetblue 2px solid;
+  border-radius: 2%;
+}
+#chatbox{
+  position: relative;
+  overflow: auto;
+  max-height: 40vh;
 }
 </style>
