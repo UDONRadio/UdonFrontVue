@@ -1,6 +1,6 @@
 <template>
-  <v-layout ma-0 pa-0 row fill-height align-center justify-space-around id="navbar">
-    <v-flex md10>
+  <v-layout ma-0 pa-0 row fill-height align-center justify-space-around >
+    <v-flex md10 id="navbar">
       <player/>
     </v-flex>
   </v-layout>

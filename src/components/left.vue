@@ -1,8 +1,8 @@
 <template>
   <v-layout column fill-height justify-end id="left" >
-    <v-flex md4 ml-5 pl-5 mb-0 pb-0 pt-3 style="postion:relative;">
-      <div style="position:absolute;height:30%;width:30%;">
-        <img src="../assets/calendrier.svg" height="70%" width="40%"/>
+    <v-flex md3 offset-md1 style="postion:relative;">
+      <div>
+        <v-img :src="require('../assets/calendrier.png')" contain aspect-ratio="1.25" />
       </div>
       <div id="month">
         <h1>
@@ -13,12 +13,12 @@
         {{date.getDate()}}
       </div>
     </v-flex>
-    <v-flex md4 pl-4 ml-3 style="position: relative;">
-      <div style="position:absolute;width:100%;height:100%;">
-        <img src="../assets/propos.svg" height="100%" width="100%"/>
-      </div>
-      <div id="aprops">
-        A propos
+    <v-flex md2>
+
+    </v-flex>
+    <v-flex md4>
+      <div>
+        <v-img :src="require('../assets/propos.svg')" contain aspect-ratio="0.95"/>
       </div>
     </v-flex>
   </v-layout>
@@ -30,9 +30,10 @@ export default {
   data () {
     return {
       date: new Date(),
-      month: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Aout','Septembre','Octobre','Novembre','Décembre']
+      month: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
     }
-  }
+  },
+
 }
 </script>
 
@@ -45,24 +46,16 @@ div.flex{
 }
 #month{
   position:absolute;
-  padding-top:5vh;
-  padding-left:4vw;
-  font-size:75%;
-  transform: rotate(-8deg);
+  bottom:67vh;
+  left:8vw;
+  font-size:100%;
+  transform: rotate(-9deg);
 }
 #day{
   position:absolute;
-  padding-top: 9vh;
-  padding-left: 5vw;
-  font-size:305%;
+  bottom: 57vh;
+  left: 9vw;
+  font-size: 350%;
   transform: rotate(-4deg);
-}
-#aprops{
-  position:absolute;
-  margin-top:8vh;
-  padding-left:6vw;
-  padding-top:1vw;
-  font-size:200%;
-  transform: rotate(-25deg);
 }
 </style>

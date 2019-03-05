@@ -1,12 +1,10 @@
 <template>
-  <v-layout row fill-height pl-3 pb-3 id="player" justify-space-around align-space-around>
-    <v-flex md4 >
-      <div v-if="pause" @click="stop" >
-        <v-img :src="require('../assets/play.png')" class="play" contain/>
-      </div>
-      <div  v-else @click="stop" class="play">
-        <v-img :src="require('../assets/pause.png')" class="play" contain/>
-      </div>
+  <v-layout row fill-height id="player" justify-space-around align-space-around>
+    <v-flex md4 v-if="pause" @click="stop">
+        <v-img :src="require('../assets/play.png')" class="play" contain aspect-ratio="1.5"/>
+    </v-flex>
+    <v-flex md4 v-else @click="stop" class="play" >
+        <v-img :src="require('../assets/pause.png')" class="play" contain aspect-ratio="1.3"/>
     </v-flex>
     <v-flex md8>
       <v-layout d-flex fill-height column id="meta">
@@ -18,6 +16,8 @@
             <v-flex md6>
               <v-slider
               v-model="player.volume"
+              prepend-icon="volume_down"
+              @click:prepend="mute"
               min="0"
               max="1"
               step="0.05">
@@ -61,15 +61,21 @@ export default {
         this.pause = false
         this.player.play()
         console.log(this.pause)
-      }
-      else {
+      } else {
         this.pause = true
         this.player.pause()
         console.log(this.pause)
       }
     },
+    mute () {
+      if (this.player.volume === 0) {
+        this.player.volume = this.prev_volume
+      } else {
+        this.prev_volume = this.player.volume
+        this.player.volume = 0
+      }
+    },
     getArtist: function () {
-
       fetch('https://udonradio.fr/api/radio/song/played', { mode: 'cors', headers: { 'Access-Control-Allow-Origin': '*' } })
         .then((response) => response.json())
         .then((data) => {
@@ -88,13 +94,10 @@ export default {
 </script>
 
 <style scoped lang="less">
-#meta{
-}
-div.flex {
-  background:white;
-}
-.play{
-  max-width:13vw;
-  max-height:16vh;
+
+#player{
+  background-color: white;
+  border: cadetblue 5px solid;
+  border-radius: 2%;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <v-layout fill-height column id="chat" ma-0 pa-0 style="border: red solid 1px;">
+  <v-layout fill-height column id="chat" ma-0 pa-0 fixed >
     <v-flex md10 id="chatbox" fixed>
       <v-list two-line>
         <template v-for="item in messages" fill-height fixed>
@@ -37,7 +37,7 @@ export default {
   data: () => {
     return {
       message: '',
-      user:'Jean-mimi',
+      user: 'Jean-mimi',
       messages: [
         {
           auteur: 'Jean-mimi',
@@ -46,6 +46,46 @@ export default {
         {
           auteur: 'Test1',
           text: 'je suis un robot bip bip boup'
+        },
+        {
+          auteur: 'Test1',
+          text: 'je suis un robot bip bip boup'
+        },
+        {
+          auteur: 'Test1',
+          text: 'je suis un robot bip bip boup'
+        },
+        {
+          auteur: 'Test1',
+          text: 'je suis un robot bip bip boup'
+        },
+        {
+          auteur: 'Test1',
+          text: 'je suis un robot bip bip boup'
+        },
+        {
+          auteur: 'Test1',
+          text: 'je suis un robot bip bip boup'
+        },
+        {
+          auteur: 'Test1',
+          text: 'je suis un robot bip bip boup'
+        },
+        {
+          auteur: 'Test1',
+          text: 'je suis un robot bip bip boup'
+        },
+        {
+          auteur: 'Test1',
+          text: 'je suis un robot bip bip boup'
+        },
+        {
+          auteur: 'Test1',
+          text: 'je suis un robot bip bip boup'
+        },
+        {
+          auteur: 'Test1',
+          text: 'je suis un robot bip bip boup boup bip boup bip bip boup bip bip'
         }
       ]
     }
@@ -61,7 +101,8 @@ export default {
 <style scoped lang="less">
 #chat{
   background-color: white;
-  border: cadetblue 2px solid;
+  border: black 5px solid;
+  max-height: 80vh;
   border-radius: 2%;
 }
 #chatbox{

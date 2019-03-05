@@ -1,12 +1,12 @@
 <template>
   <v-layout row fill-height align-space-around justify-space-around id="home">
-    <v-flex md3 mr-3>
+    <v-flex md2>
       <left/>
     </v-flex>
-    <v-flex md9  ma-0>
+    <v-flex md8>
       <Center/>
     </v-flex>
-    <v-flex md3 ml-3>
+    <v-flex md2>
       <right/>
     </v-flex>
   </v-layout>
