@@ -1,9 +1,11 @@
 <template>
   <v-app id="app">
     <v-content>
-      <v-container fluid  fill-height id="container" ma-0 pa-0>
-        <audio autoplay="true" id="media" preload="metadata" src="https://udonradio.fr:8080/udon.mp3?cache-buster=1551282691430" title="https://udonradio.fr:8080/udon.mp3?cache-buster=1551282691430"><p>Your browser does not support the <code>audio</code> element.</p></audio>
-        <router-view></router-view>
+      <v-container fluid  fill-height  ma-0 pa-0>
+        <v-content transition="slide-x-transition" id="container">
+          <audio autoplay="true" id="media" preload="metadata" src="https://udonradio.fr:8080/udon.mp3?cache-buster=1551282691430" title="https://udonradio.fr:8080/udon.mp3?cache-buster=1551282691430"><p>Your browser does not support the <code>audio</code> element.</p></audio>
+          <router-view></router-view>
+        </v-content>
       </v-container>
     </v-content>
   </v-app>
@@ -30,8 +32,7 @@ export default {
   background-color: #def2fd;
   overflow:hidden;
   #container{
-    z-index:1;
-    position: absolute;
+    height: 100%;
   }
 }
 

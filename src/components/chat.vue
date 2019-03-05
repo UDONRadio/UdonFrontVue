@@ -1,8 +1,8 @@
 <template>
-  <v-layout fill-height column id="chat" ma-0 pa-0>
-    <v-flex md10 id="chatbox">
+  <v-layout fill-height column id="chat" ma-0 pa-0 style="border: red solid 1px;">
+    <v-flex md10 id="chatbox" fixed>
       <v-list two-line>
-        <template v-for="item in messages" >
+        <template v-for="item in messages" fill-height fixed>
           <v-list-tile
             :key="item.auteur"
           >
@@ -44,35 +44,7 @@ export default {
           text: 'salut les potes'
         },
         {
-          auteur: 'Test',
-          text: 'je suis un robot bip bip boup'
-        },
-        {
-          auteur: 'Test',
-          text: 'je suis un robot bip bip boup'
-        },
-        {
-          auteur: 'Test',
-          text: 'je suis un robot bip bip boup'
-        },
-        {
-          auteur: 'Test',
-          text: 'je suis un robot bip bip boup'
-        },
-        {
-          auteur: 'Test',
-          text: 'je suis un robot bip bip boup'
-        },
-        {
-          auteur: 'Test',
-          text: 'je suis un robot bip bip boup'
-        },
-        {
-          auteur: 'Test',
-          text: 'je suis un robot bip bip boup'
-        },
-        {
-          auteur: 'Test',
+          auteur: 'Test1',
           text: 'je suis un robot bip bip boup'
         }
       ]
@@ -93,8 +65,6 @@ export default {
   border-radius: 2%;
 }
 #chatbox{
-  position: relative;
   overflow: auto;
-  max-height: 40vh;
 }
 </style>

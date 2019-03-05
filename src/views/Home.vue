@@ -30,7 +30,10 @@ export default {
 <style scoped lang="less">
 #home{
   width: 100%;
+  height: 100%;
   background: url('../assets/pates-top.svg') top left no-repeat fixed ,url('../assets/pates-bottom.svg') no-repeat bottom left fixed ,url('../assets/bol.svg') no-repeat  bottom right fixed;
   background-size: 37% , 70% 20% , 30%;
+}
+.flex{
 }
 </style>
