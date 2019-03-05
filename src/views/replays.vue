@@ -5,15 +5,7 @@
     </v-flex>
     <v-flex md9  ma-0>
       <v-layout column fill-height justify-start >
-        <v-flex ma-0 md2>
-          <navbar/>
-        </v-flex>
-        <v-flex md8 ma-0>
-          replays
-        </v-flex>
-        <v-flex md2>
-          <recre/>
-        </v-flex>
+
       </v-layout>
     </v-flex>
     <v-flex md3 ml-3>
@@ -24,17 +16,17 @@
 
 <script>
 import left from '../components/left.vue'
-import navbar from './navbar.vue'
-import recre from '../components/recre.vue'
 import right from '../components/right.vue'
 
 export default {
   name: 'Home',
   components: {
-    navbar,
-    recre,
     left,
     right
+  },
+  props: ['id'],
+  mounted: function () {
+    console.log(this.id)
   }
 }
 </script>

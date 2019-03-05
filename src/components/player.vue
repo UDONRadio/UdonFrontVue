@@ -1,31 +1,31 @@
 <template>
   <v-layout row fill-height id="player" justify-space-around align-space-around>
     <v-flex md4 v-if="pause" @click="stop">
-        <v-img :src="require('../assets/play.png')" class="play" contain aspect-ratio="1.5"/>
+        <v-img :src="require('../assets/play.png')" class="play" contain aspect-ratio="3"/>
     </v-flex>
     <v-flex md4 v-else @click="stop" class="play" >
-        <v-img :src="require('../assets/pause.png')" class="play" contain aspect-ratio="1.3"/>
+        <v-img :src="require('../assets/pause.png')" class="play" contain aspect-ratio="3"/>
     </v-flex>
     <v-flex md8>
       <v-layout d-flex fill-height column id="meta">
-        <v-flex md6 mb-3 ml-3 pa-3>
+        <v-flex md6 pa-2>
           {{ metadata.artist }} - {{ metadata.title }}  {{ metadata.album }}
         </v-flex>
         <v-flex md6>
           <v-layout row fill-height align-space-between justify-space-between>
-            <v-flex md6>
+            <v-flex md6 pa-2>
               <v-slider
               v-model="player.volume"
               prepend-icon="volume_down"
               @click:prepend="mute"
-              min="0"
-              max="1"
-              step="0.05">
+              :min="0"
+              :max="1"
+              :step="0.05">
 
               </v-slider>
             </v-flex>
-            <v-flex md5 pa-3>
-              live1
+            <v-flex md6 pa-4>
+              live
             </v-flex>
           </v-layout>
         </v-flex>
@@ -97,7 +97,10 @@ export default {
 
 #player{
   background-color: white;
-  border: cadetblue 5px solid;
+  border: black 5px solid;
   border-radius: 2%;
+  .flex{
+    border: black solid 1px;
+  }
 }
 </style>

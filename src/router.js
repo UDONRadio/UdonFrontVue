@@ -17,7 +17,8 @@ export default new Router({
     {
       path: '/replays',
       name: 'replays',
-      component: replays
+      component: replays,
+      props: (route) => ({ id: route.query.id })
     }
   ]
 })

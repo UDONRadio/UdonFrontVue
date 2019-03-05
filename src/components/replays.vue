@@ -9,9 +9,13 @@
 </template>
 
 <script>
-    export default {
-        name: "replays"
-    }
+export default {
+  name: 'replays',
+  props: ['id'],
+  mounted: function () {
+    console.log(this.props.id)
+  }
+}
 </script>
 
 <style scoped>

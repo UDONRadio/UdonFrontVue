@@ -16,7 +16,7 @@ export default {
 <style scoped lang="less">
 #infobox {
   background-color: white;
-  border: cadetblue 5px solid;
+  border: black 5px solid;
   border-radius: 2%;
   #textbox{
     max-height: 55vh;
