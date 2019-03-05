@@ -1,43 +1,66 @@
 <template>
-  <v-layout row fill-height align-space-around justify-space-around id="home">
-    <v-flex md3 mr-3>
-      <left/>
-    </v-flex>
-    <v-flex md9  ma-0>
-      <v-layout column fill-height justify-start >
-
+  <v-layout column fill-height align-center justify-center id="replays" >
+    <v-flex md10>
+      <v-layout row fill-height justify-space-between >
+        <v-flex md7 pr-3>
+          <v-layout column fill-height justify-space-between align-space-between>
+            <v-flex md1 pb-3>
+              <Mixcloud :episode="episode"></Mixcloud>
+            </v-flex>
+            <v-flex md11 pt-3>
+              <Emissions></Emissions>
+            </v-flex>
+          </v-layout>
+        </v-flex>
+        <v-flex md5 pl-3>
+          <Emission :emission="emission"></Emission>
+        </v-flex>
       </v-layout>
-    </v-flex>
-    <v-flex md3 ml-3>
-      <right/>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
-import left from '../components/left.vue'
-import right from '../components/right.vue'
+import Mixcloud from '../components/mixcloud.vue'
+import Emissions from '../components/emissions.vue'
+import Emission from '../components/emission.vue'
 
 export default {
   name: 'Home',
   components: {
-    left,
-    right
+    Mixcloud,
+    Emission,
+    Emissions
   },
-  props: ['id'],
+  data () {
+    return {
+      episode: this.ep,
+      emission: this.em,
+      emissions: [
+        {
+          id: 1,
+          titre: 'placeholder',
+          episodes: [
+            {
+              titre: ''
+            }
+          ]
+        }
+      ]
+    }
+  },
+  props: ['ep', 'em'],
   mounted: function () {
-    console.log(this.id)
+    if (this.emission === undefined) this.emission = '1'
+    if (this.episode === undefined) this.episode = '2'
   }
 }
 </script>
 
 <style scoped lang="less">
-  #home{
-    width: 100%;
-    height: 100%;
-    background: url('../assets/pates-top.svg') top left no-repeat fixed ,url('../assets/pates-bottom.svg') no-repeat bottom left fixed ,url('../assets/bol.svg') no-repeat  bottom right fixed;
-    background-size: 37% , 70% 20% , 30%;
+  #replays{
   }
   .flex{
+    border: solid black 1px;
   }
 </style>
