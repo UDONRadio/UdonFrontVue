@@ -1,61 +1,68 @@
 <template>
-  <v-layout fill-height column id="chat" ma-0 pa-0 fixed >
-    <v-flex md10 id="chatbox" fixed>
-      <v-list two-line>
-        <template  fill-height fixed>
-          <message :messages="item" v-for="item in messages" :key="item.auteur"></message>
-        </template>
-      </v-list>
+  <v-layout fill-height column align-space-between justify-end id="chat">
+    <v-flex md11 id="chatbox" style="max-height:73vh;" v-chat-scroll>
+      <v-card auto-scroll ma-0 pa-2 >
+        <message  :messages="item" v-for="item in messages" :align="align" :key="item.auteur"></message>
+      </v-card>
     </v-flex>
-    <v-flex md2>
-      <v-text-field
-        label="Subject"
-        v-model="message"
-        placeholder="Vasy exprime toi "
-        single-line
-        full-width
-        hide-details
-        append-icon="send"
-        @click:append="send"
-      ></v-text-field>
+    <v-flex md1>
+      <v-layout row fill-height justify-space-around aligne-space-between style="background-color: antiquewhite;">
+        <v-flex md10 >
+          <v-text-field
+              v-model="texte"
+              label="Exprime toi"
+              color="grey"
+              @keydown.enter="send"
+              autofocus
+            ></v-text-field>
+        </v-flex>
+        <v-flex md2 style="z-index:2;">
+          <v-img :src="require('../assets/send.svg')" contain aspect-ratio="1" @click="send" />
+        </v-flex>
+      </v-layout>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
-import message from './messages.vue'
+import Message from './messages.vue'
+import { message } from '../services/index.js'
+
 export default {
   name: 'chat',
   components: {
-    message
+    Message
   },
-  data: () => {
+  props: ['username'],
+  data () {
     return {
-      message: '',
-      user: 'Jean-mimi',
-      messages: [
-        {
-          auteur: 'Jean-mimi',
-          text: 'salut les potes'
-        },
-        {
-          auteur: 'Test1',
-          text: 'je suis un robot bip bip boup'
-        },
-        {
-          auteur: 'Test1',
-          text: 'je suis un robot bip bip boup'
-        },
-        {
-          auteur: 'Test1',
-          text: 'je suis un robot bip bip boup'
-        }
-      ]
+      texte: '',
+      user: this.$store.state.user,
+      messages: [],
+      align: 'left'
     }
+  },
+  mounted () {
+    if (this.user === undefined) this.user = this.naming()
+    message.on('create', (message) => {
+      console.log(message)
+    })
+    console.log(this.user)
   },
   methods: {
     send () {
-      alert(`promis le message "${this.message}" ete envoye`)
+      let messagebis = {
+        auteur: this.$store.state.user,
+        text: this.texte,
+        align: 'right'
+      }
+      this.messages.push(messagebis)
+      this.texte = ''
+      console.log(this.user)
+    },
+    naming () {
+      let a = Math.floor(Math.random() * Math.floor(9999))
+      return `anon${a}`
     }
   }
 }

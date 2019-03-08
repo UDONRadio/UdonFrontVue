@@ -1,20 +1,18 @@
 <template>
-  <v-list-tile
-    :key="messages.auteur"
-  >
-    <v-list-tile-content class="justify-right">
-      <v-list-tile-title style="color:purple;">
-        {{messages.auteur}}
-      </v-list-tile-title>
-      {{messages.text}}
-    </v-list-tile-content>
-  </v-list-tile>
+  <v-layout fill-height row wrap>
+    <v-flex md12 ma-1 pa-0 flexbox>
+      <v-card ripple color="blue-grey darken-2" class="white--text" :style="{ textAlign: align }">
+        <h3>{{messages.auteur}}</h3>
+        {{messages.text}}
+      </v-card>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
 export default {
   name: 'messages',
-  props: ['messages']
+  props: ['messages', 'align']
 }
 </script>
 

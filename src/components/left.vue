@@ -5,7 +5,7 @@
     </v-flex>
     <v-flex md2 pb-5>
       <div>
-        <v-img :src="require('../assets/calendrier.png')" contain aspect-ratio="1.25" />
+        <Calendar></Calendar>
       </div>
       <div id="month">
         <h1>
@@ -16,24 +16,28 @@
         {{date.getDate()}}
       </div>
     </v-flex>
-    <v-flex md3>
-      <div>
-        <v-img :src="require('../assets/propos.svg')" contain aspect-ratio="1"/>
-      </div>
+    <v-flex md3 style="z-index:2">
+      <Propos></Propos>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
+import Calendar from './calendar.vue'
+import Propos from './propos.vue'
 export default {
   name: 'left',
+  components: {
+    Calendar,
+    Propos
+  },
   data () {
     return {
       date: new Date(),
-      month: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
+      month: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+      calendar: false
     }
   }
-
 }
 </script>
 
@@ -43,6 +47,7 @@ export default {
 }
 
 #month{
+  pointer-events: none;
   position:absolute;
   bottom:66vh;
   left:5vw;
@@ -50,6 +55,7 @@ export default {
   transform: rotate(-7deg);
 }
 #day{
+  pointer-events: none;
   position:absolute;
   bottom: 55vh;
   left: 7vw;
