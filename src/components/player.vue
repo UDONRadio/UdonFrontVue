@@ -2,10 +2,10 @@
   <v-layout row fill-height id="player" justify-space-around align-space-around>
     <v-flex md2 style="border-right: black solid 2px;">
       <v-layout row align-end justify-center fill-height>
-        <v-flex md8 v-if="pause" @click="stop" >
+        <v-flex md8 v-if="pause" @click="toggle" >
             <v-img :src="require('../assets/play.svg')" class="play" contain aspect-ratio="1"/>
         </v-flex>
-        <v-flex md8 v-else @click="stop" class="play">
+        <v-flex md8 v-else @click="toggle" class="play">
             <v-img :src="require('../assets/pause.svg')" class="play" contain aspect-ratio="1"/>
         </v-flex>
       </v-layout>
@@ -38,13 +38,14 @@
   </v-layout>
 </template>
 
+
 <script>
 export default {
   name: 'player',
   data () {
     return {
-      pause: false,
-      player: '',
+      pause: true,
+      player: new Audio(),
       prev_volume: 50,
       volume: 50,
       metadata: {
@@ -57,12 +58,14 @@ export default {
   mounted: function () {
     this.getArtist()
     setInterval(this.getArtist, 10000)
-    this.player = document.getElementById('media')
+    this.toggle()
   },
   methods: {
-    stop: function () {
+    toggle: function () {
       if (this.pause) {
         this.pause = false
+        this.updateURI()
+        this.player.load()
         this.player.play()
         console.log(this.pause)
       } else {
@@ -78,6 +81,11 @@ export default {
         this.prev_volume = this.player.volume
         this.player.volume = 0
       }
+    },
+    updateURI() {
+      const base_uri = "https://udonradio.fr:8080/udon.mp3"
+
+      this.player.src = base_uri + '?cache-buster=' + (new Date().getTime())
     },
     getArtist: function () {
       // fetch('https://udonradio.fr/api/radio/song/played', { mode: 'cors', headers: { 'Access-Control-Allow-Origin': '*' } })
