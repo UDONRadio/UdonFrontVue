@@ -1,5 +1,5 @@
 <template>
-  <v-layout column fill-height align-center justify-center id="replays" >
+  <v-layout column fill-height align-center justify-space-around id="replays" >
     <v-flex md10>
       <v-layout row fill-height justify-space-between >
         <v-flex md7 pr-3>
@@ -13,7 +13,7 @@
           </v-layout>
         </v-flex>
         <v-flex md5 pl-3>
-          <Emission :emission="emission"></Emission>
+          <Emission :emission="emissions[selected]"></Emission>
         </v-flex>
       </v-layout>
     </v-flex>
@@ -34,15 +34,31 @@ export default {
   },
   data () {
     return {
-      episode: this.ep,
-      emission: this.em,
+      selected: 0,
       emissions: [
         {
-          id: 1,
-          titre: 'placeholder',
-          episodes: [
+          'img': 'https://picsum.photos/200',
+          'title': 'JUL',
+          'description': "J'aime les bites",
+          'episode': [
             {
-              titre: ''
+              'title': 'cyka',
+              'key': '/UDONradio/attique-vingoss-project/'
+            }
+          ]
+        },
+        {
+          'img': 'https://picsum.photos/200',
+          'title': 'PEQ',
+          'description': "J'aime vraiment les bites",
+          'episode': [
+            {
+              'title': 'tommy',
+              'key': '/UDONradio/%C3%A9mission-du-dimanche-la-masculinit%C3%A9/'
+            },
+            {
+              'title': 'bite',
+              'key': '/UDONradio/or-piste-po%C3%A8me-5-le-collectif-cln/'
             }
           ]
         }
