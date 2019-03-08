@@ -16,11 +16,9 @@
     </v-btn>
     <v-dialog
       v-model="dialog"
-      width="500"
     >
       <v-card
         class="mx-auto"
-        max-width="500"
       >
         <v-card-title class="title font-weight-regular justify-left">
           <span>{{ tittle }}</span>
@@ -35,6 +33,7 @@
                 v-model="email"
                 :rules="[rules.required,rules.min]"
                 type="email"
+                value=""
               ></v-text-field>
               <v-text-field
                 label="password"
@@ -124,10 +123,11 @@ export default {
       pass2: null,
       email: null,
       username: null,
+      value: '',
       rules: {
         required: (value) => !!value || 'Required.',
-        min: (v) => v.length >= 8 || 'Min 8 characters',
-        passMatch: (v) => v === this.pass2 || 'The passwords doesn\'t match'
+        min: (value) => value.length >= 8 || 'Min 8 characters',
+        passMatch: (value) => value === this.pass2 || 'The passwords doesn\'t match'
       }
     }
   },

@@ -3,7 +3,7 @@ import auth from '@feathersjs/authentication-client'
 import socketio from 'feathers-socketio/client'
 import io from 'socket.io-client'
 
-const socket = io('http://localhost:3030')
+const socket = io('http://192.168.1.29:3030')
 
 export const client = feathers()
 client.configure(socketio(socket))

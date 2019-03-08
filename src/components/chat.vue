@@ -1,8 +1,8 @@
 <template>
   <v-layout fill-height column align-space-between justify-end id="chat">
-    <v-flex md11 id="chatbox" style="max-height:73vh;" v-chat-scroll>
+    <v-flex md11 id="chatbox" style="max-height:57vh;" v-chat-scroll>
       <v-card auto-scroll ma-0 pa-2 >
-        <message  :messages="item" v-for="item in messages" :align="align" :key="item.auteur"></message>
+        <message  :messages="item" v-for="item in $store.state.message" :align="align" :key="item.auteur"></message>
       </v-card>
     </v-flex>
     <v-flex md1>
@@ -38,12 +38,11 @@ export default {
     return {
       texte: '',
       user: this.$store.state.user,
-      messages: [],
+      messages: this.$store.state.message,
       align: 'left'
     }
   },
   mounted () {
-    if (this.user === undefined) this.user = this.naming()
     message.on('create', (message) => {
       console.log(message)
     })
@@ -56,14 +55,18 @@ export default {
         text: this.texte,
         align: 'right'
       }
-      this.messages.push(messagebis)
+      message.create(messagebis)
       this.texte = ''
       console.log(this.user)
+        .then((response) => console.log(response))
     },
     naming () {
       let a = Math.floor(Math.random() * Math.floor(9999))
       return `anon${a}`
     }
+  },
+  computed: {
+    //
   }
 }
 </script>
@@ -73,6 +76,7 @@ export default {
   background-color: white;
   border: black 5px solid;
   border-radius: 2%;
+  z-index: 1;
 }
 #chatbox{
   overflow: auto;

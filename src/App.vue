@@ -24,7 +24,7 @@
 <script>
 import Left from './components/left.vue'
 import Right from './components/right.vue'
-import { client } from './services/index.js'
+import { client, message } from './services/index.js'
 
 export default {
   name: 'App',
@@ -42,28 +42,40 @@ export default {
       console.log('authenticate')
       this.$store.state.user = client.get('user')
     })
+    message.on('created', (mess) => {
+      console.log('new message')
+      this.$store.state.message.push(mess)
+    })
     client.on('logout', () => {
       console.log('logout')
       this.$store.state.user = null
     })
-    client.authenticate()
-      .then(response => {
-        console.log('authentication in progress')
-        return client.passport.verifyJWT(response.accessToken)
-      })
-      .then(payload => {
-        console.log('authentication in progress')
-        return client.service('users').get(payload.userID)
-      })
-      .then(user => {
-        console.log('authentication in progress')
-        client.set('user', user)
-        console.log(client.get('user'))
-      })
-      .catch((e) => {
-        this.$store.commit('naming')
-        console.log(e)
-      })
+    client.on('created', () => {
+      console.log('new user')
+    })
+    if (client.get('user')) {
+      client.authenticate()
+        .then(response => {
+          console.log('authentication in progress')
+          return client.passport.verifyJWT(response.accessToken)
+        })
+        .then(payload => {
+          console.log('authentication in progress')
+          return client.service('users').get(payload.userID)
+        })
+        .then(user => {
+          console.log('authentication in progress')
+          client.set('user', user)
+          console.log(client.get('user'))
+        })
+        .catch((e) => {
+          this.$store.commit('naming')
+          console.log(e)
+        })
+    } else {
+      this.$store.commit('naming')
+      console.log(this.$store.state.user)
+    }
   }
 }
 </script>
@@ -82,7 +94,7 @@ export default {
     height: 100%;
     background: url('./assets/pates-top.svg') top left no-repeat fixed ,url('./assets/pates-bottom.svg') no-repeat bottom left fixed ,url('./assets/bol.svg') no-repeat  bottom right fixed;
     background-size: 37% , 70% 20% , 30%;
-    z-index: 1;
+    z-index: 2;
     pointer-events: none;
   }
 }
