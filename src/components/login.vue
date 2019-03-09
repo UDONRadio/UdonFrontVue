@@ -138,7 +138,6 @@ export default {
           client.set('user', user)
           localStorage.user = this.$store.state.user = user
           this.$store.state.user.logged = true
-          console.log(this.$store.state.user)
           this.dialog = false
         })
         .catch((e) => {
