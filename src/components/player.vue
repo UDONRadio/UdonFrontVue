@@ -1,31 +1,35 @@
 <template>
-  <v-layout row fill-height pl-3 pb-3 id="player">
-    <v-flex md4 >
-      <div v-if="pause" @click="stop" >
-        <v-img :src="require('../assets/play.png')" class="play" />
-      </div>
-      <div  v-else @click="stop" class="play">
-        <v-img :src="require('../assets/pause.png')" class="play"/>
-      </div>
-    </v-flex>
-    <v-flex md8>
-      <v-layout d-flex fill-height column id="meta">
-        <v-flex md6 mb-3 ml-3 >
-          {{ artiste }} - {{ titre }}  {{ album }}
+  <v-layout row fill-height id="player" justify-space-around align-space-around>
+    <v-flex md2 style="border-right: black solid 2px;">
+      <v-layout row align-center justify-center fill-height>
+        <v-flex md8 v-if="pause" @click="stop" >
+            <v-img :src="require('../assets/play.svg')" class="play" contain aspect-ratio="1"/>
         </v-flex>
-        <v-flex md6>
+        <v-flex md8 v-else @click="stop" class="play">
+            <v-img :src="require('../assets/pause.svg')" class="play" contain aspect-ratio="1"/>
+        </v-flex>
+      </v-layout>
+    </v-flex>
+    <v-flex md10>
+      <v-layout d-flex fill-height column id="meta">
+        <v-flex md6 pa-2 class="" style="border-bottom: black solid 2px;text-align:center;">
+          {{ metadata.artist }} - {{ metadata.title }}  {{ metadata.album }}
+        </v-flex>
+        <v-flex md4>
           <v-layout row fill-height align-space-between justify-space-between>
-            <v-flex md6>
+            <v-flex md6 pa-2 style="border-right: black solid 1px;">
               <v-slider
               v-model="player.volume"
-              min="0"
-              max="1"
-              step="0.05">
+              prepend-icon="volume_down"
+              @click:prepend="mute"
+              :min="0"
+              :max="1"
+              :step="0.05">
 
               </v-slider>
             </v-flex>
-            <v-flex md5 >
-              live1
+            <v-flex md6 pa-4 style="border-left: black solid 1px;">
+              live
             </v-flex>
           </v-layout>
         </v-flex>
@@ -43,15 +47,17 @@ export default {
       player: '',
       prev_volume: 50,
       volume: 50,
-      artiste: 'jean-mimi le hobbo',
-      titre: 'The tarliest tarly wave',
-      album: 'I can\'t be more tarly'
+      metadata: {
+        artist: 'truc',
+        title: 'muche',
+        album: 'chose'
+      }
     }
   },
   mounted: function () {
+    this.getArtist()
+    setInterval(this.getArtist, 10000)
     this.player = document.getElementById('media')
-    this.getArtist();
-    console.log(this.player)
   },
   methods: {
     stop: function () {
@@ -59,21 +65,32 @@ export default {
         this.pause = false
         this.player.play()
         console.log(this.pause)
-      }
-      else {
+      } else {
         this.pause = true
         this.player.pause()
         console.log(this.pause)
       }
     },
+    mute () {
+      if (this.player.volume === 0) {
+        this.player.volume = this.prev_volume
+      } else {
+        this.prev_volume = this.player.volume
+        this.player.volume = 0
+      }
+    },
     getArtist: function () {
-      fetch('http://udonradio.fr/api/radio/song/played', { mode: 'cors', headers: { 'Access-Control-Allow-Origin': '*' } })
-        .then((response) => {
-          console.log(response)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+      // fetch('https://udonradio.fr/api/radio/song/played', { mode: 'cors', headers: { 'Access-Control-Allow-Origin': '*' } })
+      //   .then((response) => response.json())
+      //   .then((data) => {
+      //     console.log(data)
+      //     this.metadata.artist = data[0].artist
+      //     this.metadata.title = data[0].title
+      //     this.metadata.album = data[0].album
+      //   })
+      //   .catch((err) => {
+      //     console.log(err)
+      //   })
     }
   }
 }
@@ -81,13 +98,13 @@ export default {
 </script>
 
 <style scoped lang="less">
-#meta{
-}
-div.flex {
-  background:white;
-}
-.play{
-  max-width:13vw;
-  max-height:16vh;
+
+#player{
+  background-color: white;
+  border: black 5px solid;
+  border-radius: 2%;
+  .flex{
+
+  }
 }
 </style>

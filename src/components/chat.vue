@@ -1,86 +1,63 @@
 <template>
-  <v-layout fill-height column id="chat" ma-0 pa-0>
-    <v-flex md10 id="chatbox">
-      <v-list two-line>
-        <template v-for="item in messages" >
-          <v-list-tile
-            :key="item.auteur"
-          >
-            <v-list-tile-content style="text-align: right;">
-              <v-list-tile-title style="color:purple;">
-                {{item.auteur}}
-              </v-list-tile-title>
-                {{item.text}}
-            </v-list-tile-content>
-          </v-list-tile>
-        </template>
-      </v-list>
+  <v-layout fill-height column align-space-between justify-end id="chat">
+    <v-flex md11 id="chatbox" style="max-height:73vh;" v-chat-scroll>
+      <v-card auto-scroll ma-0 pa-2 >
+        <message  :messages="item" v-for="item in messages" :align="item.auteur === $store.state.user.username ? 'right' : 'left'" :key="item._id"></message>
+      </v-card>
     </v-flex>
-    <v-flex md2>
-      <v-text-field
-        label="Subject"
-        v-model="message"
-        placeholder="Vasy exprime toi "
-        single-line
-        full-width
-        hide-details
-        append-icon="send"
-        @click:append="test"
-      ></v-text-field>
+    <v-flex md1>
+      <v-layout row fill-height justify-space-around aligne-space-between style="background-color: antiquewhite;">
+        <v-flex md10 >
+          <v-text-field
+              v-model="texte"
+              label="Exprime toi"
+              color="grey"
+              @keydown.enter="send"
+              autofocus
+            ></v-text-field>
+        </v-flex>
+        <v-flex md2 style="z-index:2;">
+          <v-img :src="require('../assets/send.svg')" contain aspect-ratio="1" @click="send" />
+        </v-flex>
+      </v-layout>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
+import Message from './messages.vue'
+import { message } from '../services/index.js'
+
 export default {
   name: 'chat',
-  data: () => {
+  components: {
+    Message
+  },
+  props: ['username'],
+  data () {
     return {
-      message: '',
-      user:'Jean-mimi',
-      messages: [
-        {
-          auteur: 'Jean-mimi',
-          text: 'salut les potes'
-        },
-        {
-          auteur: 'Test',
-          text: 'je suis un robot bip bip boup'
-        },
-        {
-          auteur: 'Test',
-          text: 'je suis un robot bip bip boup'
-        },
-        {
-          auteur: 'Test',
-          text: 'je suis un robot bip bip boup'
-        },
-        {
-          auteur: 'Test',
-          text: 'je suis un robot bip bip boup'
-        },
-        {
-          auteur: 'Test',
-          text: 'je suis un robot bip bip boup'
-        },
-        {
-          auteur: 'Test',
-          text: 'je suis un robot bip bip boup'
-        },
-        {
-          auteur: 'Test',
-          text: 'je suis un robot bip bip boup'
-        },
-        {
-          auteur: 'Test',
-          text: 'je suis un robot bip bip boup'
-        }
-      ]
+      texte: '',
+      user: this.$store.state.user.username,
+      messages: [],
+      align: 'left'
     }
   },
+  mounted () {
+    message.on('created', (message) => {
+      console.log(message)
+      this.messages.push(message)
+    })
+    console.log(this.user)
+  },
   methods: {
-    test () {
-      alert(`promis le message "${this.message}" ete envoye`)
+    send () {
+      let messagebis = {
+        auteur: this.$store.state.user.username,
+        text: this.texte,
+        align: 'right'
+      }
+      message.create(messagebis)
+      this.texte = ''
     }
   }
 }
@@ -89,12 +66,10 @@ export default {
 <style scoped lang="less">
 #chat{
   background-color: white;
-  border: cadetblue 2px solid;
+  border: black 5px solid;
   border-radius: 2%;
 }
 #chatbox{
-  position: relative;
   overflow: auto;
-  max-height: 40vh;
 }
 </style>

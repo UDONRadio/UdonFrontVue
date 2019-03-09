@@ -1,8 +1,11 @@
 <template>
-  <v-layout column fill-height justify-end id="left" >
-    <v-flex md4 ml-5 pl-5 mb-0 pb-0 pt-3 style="postion:relative;">
-      <div style="position:absolute;height:30%;width:30%;">
-        <img src="../assets/calendrier.svg" height="70%" width="40%"/>
+  <v-layout column fill-height justify-space-between align-space-between id="left" >
+    <v-flex md1>
+
+    </v-flex>
+    <v-flex md2 pb-5>
+      <div>
+        <Calendar></Calendar>
       </div>
       <div id="month">
         <h1>
@@ -13,56 +16,50 @@
         {{date.getDate()}}
       </div>
     </v-flex>
-    <v-flex md4 pl-4 ml-3 style="position: relative;">
-      <div style="position:absolute;width:100%;height:100%;">
-        <img src="../assets/propos.svg" height="100%" width="100%"/>
-      </div>
-      <div id="aprops">
-        A propos
-      </div>
+    <v-flex md3 style="z-index:2">
+      <Propos></Propos>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
+import Calendar from './calendar.vue'
+import Propos from './propos.vue'
 export default {
   name: 'left',
+  components: {
+    Calendar,
+    Propos
+  },
   data () {
     return {
       date: new Date(),
-      month: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Aout','Septembre','Octobre','Novembre','Décembre']
+      month: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+      calendar: false
     }
   }
 }
 </script>
 
 <style scoped lang="less">
-#left{
-  width:100%;
+#left {
+  width: 100%;
 }
-div.flex{
-  width:100%;
-}
+
 #month{
+  pointer-events: none;
   position:absolute;
-  padding-top:5vh;
-  padding-left:4vw;
-  font-size:75%;
-  transform: rotate(-8deg);
+  bottom:66vh;
+  left:5vw;
+  font-size:2vh;
+  transform: rotate(-7deg);
 }
 #day{
+  pointer-events: none;
   position:absolute;
-  padding-top: 9vh;
-  padding-left: 5vw;
-  font-size:305%;
+  bottom: 55vh;
+  left: 7vw;
+  font-size: 8vh;
   transform: rotate(-4deg);
-}
-#aprops{
-  position:absolute;
-  margin-top:8vh;
-  padding-left:6vw;
-  padding-top:1vw;
-  font-size:200%;
-  transform: rotate(-25deg);
 }
 </style>
