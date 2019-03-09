@@ -91,7 +91,6 @@ export default {
       }
       localStorage.username = `anon${a}`
     })
-
   }
 }
 </script>

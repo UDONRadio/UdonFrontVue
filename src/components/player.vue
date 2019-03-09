@@ -1,12 +1,12 @@
 <template>
   <v-layout row fill-height id="player" justify-space-around align-space-around>
     <v-flex md2 style="border-right: black solid 2px;">
-      <v-layout row align-center justify-center fill-height>
-        <v-flex md8 v-if="pause" @click="stop" >
-            <v-img :src="require('../assets/play.svg')" class="play" contain aspect-ratio="1"/>
+      <v-layout row align-end justify-center fill-height>
+        <v-flex md8 v-if="pause" @click="toggle" >
+          <v-img :src="require('../assets/play.svg')" class="play" contain aspect-ratio="1"/>
         </v-flex>
-        <v-flex md8 v-else @click="stop" class="play">
-            <v-img :src="require('../assets/pause.svg')" class="play" contain aspect-ratio="1"/>
+        <v-flex md8 v-else @click="toggle" class="play">
+          <v-img :src="require('../assets/pause.svg')" class="play" contain aspect-ratio="1"/>
         </v-flex>
       </v-layout>
     </v-flex>
@@ -19,12 +19,12 @@
           <v-layout row fill-height align-space-between justify-space-between>
             <v-flex md6 pa-2 style="border-right: black solid 1px;">
               <v-slider
-              v-model="player.volume"
-              prepend-icon="volume_down"
-              @click:prepend="mute"
-              :min="0"
-              :max="1"
-              :step="0.05">
+                v-model="player.volume"
+                prepend-icon="volume_down"
+                @click:prepend="mute"
+                :min="0"
+                :max="1"
+                :step="0.05">
 
               </v-slider>
             </v-flex>
@@ -43,8 +43,8 @@ export default {
   name: 'player',
   data () {
     return {
-      pause: false,
-      player: '',
+      pause: true,
+      player: new Audio(),
       prev_volume: 50,
       volume: 50,
       metadata: {
@@ -57,12 +57,14 @@ export default {
   mounted: function () {
     this.getArtist()
     setInterval(this.getArtist, 10000)
-    this.player = document.getElementById('media')
+    this.toggle()
   },
   methods: {
-    stop: function () {
+    toggle: function () {
       if (this.pause) {
         this.pause = false
+        this.updateURI()
+        this.player.load()
         this.player.play()
         console.log(this.pause)
       } else {
@@ -79,8 +81,14 @@ export default {
         this.player.volume = 0
       }
     },
+    updateURI () {
+      const baseUri = 'https://udonradio.fr:8080/udon.mp3'
+      this.player.src = baseUri + '?cache-buster=' + (new Date().getTime())
+    },
     getArtist: function () {
-      fetch('https://udonradio.fr/api/radio/song/played', { mode: 'cors', headers: { 'Access-Control-Allow-Origin': '*' } })
+      const proxyurl = 'https://cors-anywhere.herokuapp.com/'
+      const url = 'https://udonradio.fr/api/radio/song/played'
+      fetch(proxyurl + url, { mode: 'cors', headers: { 'Access-Control-Allow-Origin': '*' } })
         .then((response) => response.json())
         .then((data) => {
           console.log(data)
@@ -94,17 +102,14 @@ export default {
     }
   }
 }
-
 </script>
 
 <style scoped lang="less">
-
-#player{
-  background-color: white;
-  border: black 5px solid;
-  border-radius: 2%;
-  .flex{
-
+  #player{
+    background-color: white;
+    border: black 5px solid;
+    border-radius: 2%;
+    .flex{
+    }
   }
-}
 </style>
