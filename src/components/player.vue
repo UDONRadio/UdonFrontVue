@@ -15,7 +15,7 @@
         <v-flex md6 pa-2 class="" style="border-bottom: black solid 2px;text-align:center;">
           {{ metadata.artist }} - {{ metadata.title }}  {{ metadata.album }}
         </v-flex>
-        <v-flex md6>
+        <v-flex md4>
           <v-layout row fill-height align-space-between justify-space-between>
             <v-flex md6 pa-2 style="border-right: black solid 1px;">
               <v-slider

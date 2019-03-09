@@ -2,7 +2,7 @@
   <v-layout fill-height column align-space-between justify-end id="chat">
     <v-flex md11 id="chatbox" style="max-height:73vh;" v-chat-scroll>
       <v-card auto-scroll ma-0 pa-2 >
-        <message  :messages="item" v-for="item in messages" :align="align" :key="item.auteur"></message>
+        <message  :messages="item" v-for="item in messages" :align="item.auteur === $store.state.user.username ? 'right' : 'left'" :key="item._id"></message>
       </v-card>
     </v-flex>
     <v-flex md1>
@@ -37,32 +37,27 @@ export default {
   data () {
     return {
       texte: '',
-      user: this.$store.state.user,
+      user: this.$store.state.user.username,
       messages: [],
       align: 'left'
     }
   },
   mounted () {
-    if (this.user === undefined) this.user = this.naming()
-    message.on('create', (message) => {
+    message.on('created', (message) => {
       console.log(message)
+      this.messages.push(message)
     })
     console.log(this.user)
   },
   methods: {
     send () {
       let messagebis = {
-        auteur: this.$store.state.user,
+        auteur: this.$store.state.user.username,
         text: this.texte,
         align: 'right'
       }
-      this.messages.push(messagebis)
+      message.create(messagebis)
       this.texte = ''
-      console.log(this.user)
-    },
-    naming () {
-      let a = Math.floor(Math.random() * Math.floor(9999))
-      return `anon${a}`
     }
   }
 }
