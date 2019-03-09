@@ -1,14 +1,16 @@
 <template>
   <v-layout fill-height column align-space-between justify-end id="chat">
-    <v-flex md11 id="chatbox" style="max-height:73vh;" v-chat-scroll>
-      <v-card auto-scroll ma-0 pa-2 >
+    <v-flex md11 id="chatbox" style="max-height:55vh;" v-chat-scroll>
+      <div auto-scroll ma-0 pa-2 >
         <message  :messages="item" v-for="item in $store.state.messages" :align="item.auteur === $store.state.user.username ? 'right' : 'left'" :key="item._id"></message>
-      </v-card>
+      </div>
     </v-flex>
     <v-flex md1>
-      <v-layout row fill-height justify-space-around aligne-space-between style="background-color: antiquewhite;">
-        <v-flex md10 >
+      <v-layout row fill-height justify-center aligne-center style="border-top: solid black 1px;">
+        <v-flex md10 pt-4>
           <v-text-field
+              solo
+              flat
               v-model="texte"
               label="Exprime toi"
               color="grey"
@@ -17,7 +19,7 @@
             ></v-text-field>
         </v-flex>
         <v-flex md2 style="z-index:2;">
-          <v-img :src="require('../assets/send.svg')" contain aspect-ratio="1" @click="send" />
+          <v-img :src="require('../assets/send.svg')" contain aspect-ratio="0.85" @click="send" />
         </v-flex>
       </v-layout>
     </v-flex>

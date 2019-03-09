@@ -38,7 +38,7 @@ export default {
     }
   },
   created () {
-    if (!localStorage.jwt) {
+    if (localStorage.jwt && localStorage.jwt !== 'null') {
       console.log('token jwt')
       client.authenticate({
         strategy: 'jwt',

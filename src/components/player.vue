@@ -1,39 +1,19 @@
 <template>
-  <v-layout row fill-height id="player" justify-space-around align-space-around>
+  <v-layout row fill-height id="player" justify-center align-center>
     <v-flex md2 style="border-right: black solid 2px;">
       <v-layout row align-end justify-center fill-height>
         <v-flex md8 v-if="pause" @click="toggle" >
-          <v-img :src="require('../assets/play.svg')" class="play" contain aspect-ratio="1"/>
+          <v-img :src="require('../assets/play.svg')" class="play" contain aspect-ratio="0.7"/>
         </v-flex>
         <v-flex md8 v-else @click="toggle" class="play">
-          <v-img :src="require('../assets/pause.svg')" class="play" contain aspect-ratio="1"/>
+          <v-img :src="require('../assets/pause.svg')" class="play" contain aspect-ratio="0.7"/>
         </v-flex>
       </v-layout>
     </v-flex>
     <v-flex md10>
-      <v-layout d-flex fill-height column id="meta">
-        <v-flex md6 pa-2 class="" style="border-bottom: black solid 2px;text-align:center;">
-          {{ metadata.artist }} - {{ metadata.title }}  {{ metadata.album }}
+        <v-flex md12 style="text-align:center;" class="live">
+          {{ metadata.artist }} - {{ metadata.title }}
         </v-flex>
-        <v-flex md4>
-          <v-layout row fill-height align-space-between justify-space-between>
-            <v-flex md6 pa-2 style="border-right: black solid 1px;">
-              <v-slider
-                v-model="player.volume"
-                prepend-icon="volume_down"
-                @click:prepend="mute"
-                :min="0"
-                :max="1"
-                :step="0.05">
-
-              </v-slider>
-            </v-flex>
-            <v-flex md6 pa-4 style="border-left: black solid 1px;">
-              live
-            </v-flex>
-          </v-layout>
-        </v-flex>
-      </v-layout>
     </v-flex>
   </v-layout>
 </template>
@@ -48,9 +28,9 @@ export default {
       prev_volume: 50,
       volume: 50,
       metadata: {
-        artist: 'truc',
-        title: 'muche',
-        album: 'chose'
+        artist: '',
+        title: '',
+        album: ''
       }
     }
   },
@@ -88,7 +68,7 @@ export default {
     getArtist: function () {
       const proxyurl = 'https://cors-anywhere.herokuapp.com/'
       const url = 'https://udonradio.fr/api/radio/song/played'
-      fetch(proxyurl + url, { mode: 'cors', headers: { 'Access-Control-Allow-Origin': '*' } })
+      fetch(url, { mode: 'cors', headers: { 'Access-Control-Allow-Origin': '*' } })
         .then((response) => response.json())
         .then((data) => {
           console.log(data)
@@ -110,6 +90,10 @@ export default {
     border: black 5px solid;
     border-radius: 2%;
     .flex{
+
     }
+  }
+  .live{
+    font-size:140%;
   }
 </style>
