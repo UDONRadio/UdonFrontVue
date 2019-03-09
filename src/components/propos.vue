@@ -22,18 +22,18 @@
 </template>
 
 <script>
-  export default {
-    name: 'calendar',
-    props: ['dialogue'],
-    data () {
-      return {
-        dialog: this.dialogue
-      }
-    },
-    mounted: function () {
-      this.dialog = this.dialogue
+export default {
+  name: 'calendar',
+  props: ['dialogue'],
+  data () {
+    return {
+      dialog: this.dialogue
     }
+  },
+  mounted: function () {
+    this.dialog = this.dialogue
   }
+}
 </script>
 
 <style scoped>

@@ -37,26 +37,27 @@ export default {
   data () {
     return {
       texte: '',
-      user: this.$store.state.user,
+      user: this.$store.state.user.username,
       messages: [],
       align: 'left'
     }
   },
   mounted () {
     if (this.user === undefined) this.user = this.naming()
-    message.on('create', (message) => {
+    message.on('created', (message) => {
       console.log(message)
+      this.messages.push(message)
     })
     console.log(this.user)
   },
   methods: {
     send () {
       let messagebis = {
-        auteur: this.$store.state.user,
+        auteur: this.$store.state.user.username,
         text: this.texte,
         align: 'right'
       }
-      this.messages.push(messagebis)
+      message.create(messagebis)
       this.texte = ''
       console.log(this.user)
     },
