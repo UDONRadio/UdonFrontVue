@@ -1,19 +1,19 @@
 <template>
-  <v-layout column fill-height align-center justify-center id="replays" >
-    <v-flex md10>
+  <v-layout column fill-height align-space-around justify-space-around id="replays" >
+    <v-flex md8>
       <v-layout row fill-height justify-space-between >
         <v-flex md7 pr-3>
           <v-layout column fill-height justify-space-between align-space-between>
-            <v-flex md1 pb-3>
-              <Mixcloud :episode="episode"></Mixcloud>
+            <v-flex md11 mb-1>
+              <Emissions v-for="item in $store.state.emission" :key="item._id" :emission="item"></Emissions>
             </v-flex>
-            <v-flex md11 pt-3>
-              <Emissions></Emissions>
+            <v-flex md1 mt-2>
+              <Mixcloud></Mixcloud>
             </v-flex>
           </v-layout>
         </v-flex>
         <v-flex md5 pl-3>
-          <Emission :emission="emission"></Emission>
+          <Emission></Emission>
         </v-flex>
       </v-layout>
     </v-flex>
@@ -24,6 +24,7 @@
 import Mixcloud from '../components/mixcloud.vue'
 import Emissions from '../components/emissions.vue'
 import Emission from '../components/emission.vue'
+import { emission } from '../services/index.js'
 
 export default {
   name: 'Home',
@@ -34,25 +35,31 @@ export default {
   },
   data () {
     return {
-      episode: this.ep,
-      emission: this.em,
-      emissions: [
-        {
-          id: 1,
-          titre: 'placeholder',
-          episodes: [
-            {
-              titre: ''
-            }
-          ]
-        }
-      ]
+      //
     }
   },
   props: ['ep', 'em'],
-  mounted: function () {
-    if (this.emission === undefined) this.emission = '1'
-    if (this.episode === undefined) this.episode = '2'
+  beforeRouteEnter (to, from, next) {
+    emission.find({
+      query: {
+        $limit: 1000,
+        $sort: {
+          name: 1
+        }
+      }
+    }).then((response) => {
+      next((vm) => {
+        vm.setEmmision(response.data)
+      })
+    }).catch((e) => {
+      console.log(e)
+      next({ name: 'home' })
+    })
+  },
+  methods: {
+    setEmmision (emissions) {
+      this.$store.state.emission = emissions
+    }
   }
 }
 </script>

@@ -80,17 +80,17 @@ export default {
       }
     },
     getArtist: function () {
-      // fetch('https://udonradio.fr/api/radio/song/played', { mode: 'cors', headers: { 'Access-Control-Allow-Origin': '*' } })
-      //   .then((response) => response.json())
-      //   .then((data) => {
-      //     console.log(data)
-      //     this.metadata.artist = data[0].artist
-      //     this.metadata.title = data[0].title
-      //     this.metadata.album = data[0].album
-      //   })
-      //   .catch((err) => {
-      //     console.log(err)
-      //   })
+      fetch('https://udonradio.fr/api/radio/song/played', { mode: 'cors', headers: { 'Access-Control-Allow-Origin': '*' } })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data)
+          this.metadata.artist = data[0].artist
+          this.metadata.title = data[0].title
+          this.metadata.album = data[0].album
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   }
 }

@@ -12,4 +12,5 @@ client.configure(auth({
 }))
 
 export const message = client.service('message')
+export const emission = client.service('emission')
 export const user = client.service('users')
