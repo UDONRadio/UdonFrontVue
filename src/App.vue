@@ -38,55 +38,32 @@ export default {
     }
   },
   created () {
-    if (localStorage.jwt !== 'null' && localStorage.jwt !== undefined) {
-      console.log('already logged user trying to connect')
-      let a = localStorage.jwt
-      client.authenticate({
-        strategy: 'jwt',
-        accessToken: a
-      })
-        .then(response => {
-          localStorage.jwt = response.accessToken
-          return client.passport.verifyJWT(response.accessToken)
-        })
-        .then(payload => {
-          return client.service('users').get(payload.userId)
-        })
-        .then(user => {
-          client.set('user', user)
-          this.$store.state.user = user
-          this.$store.state.user.logged = true
-        })
-        .catch(error => {
-          console.log('Error authenticating!', error)
-        })
-    } else if (localStorage.username) {
-      console.log('user not logged but anon')
-      this.$store.state.user.username = localStorage.username
-      this.$store.state.user.logged = false
-    } else {
-      console.log('first connection')
-      let a = Math.floor(Math.random() * Math.floor(9999))
-      this.$store.state.user = {
-        username: `anon${a}`
-      }
-      localStorage.username = this.$store.state.user.username
-    }
     client.on('authenticated', () => {
-      console.log('authenticated')
+      console.log('authenticate')
+      this.$store.state.user = client.get('user')
     })
     client.on('logout', () => {
       console.log('logout')
-      localStorage.user = null
-      localStorage.username = null
-      localStorage.jwt = null
-      let a = Math.floor(Math.random() * Math.floor(9999))
-      this.$store.state.user = {
-        username: `anon${a}`,
-        logged: false
-      }
-      localStorage.username = this.$store.state.user.username
+      this.$store.state.user = null
     })
+    client.authenticate()
+      .then(response => {
+        console.log('authentication in progress')
+        return client.passport.verifyJWT(response.accessToken)
+      })
+      .then(payload => {
+        console.log('authentication in progress')
+        return client.service('users').get(payload.userID)
+      })
+      .then(user => {
+        console.log('authentication in progress')
+        client.set('user', user)
+        console.log(client.get('user'))
+      })
+      .catch((e) => {
+        this.$store.commit('naming')
+        console.log(e)
+      })
   }
 }
 </script>

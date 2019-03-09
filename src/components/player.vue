@@ -1,7 +1,7 @@
 <template>
   <v-layout row fill-height id="player" justify-space-around align-space-around>
     <v-flex md2 style="border-right: black solid 2px;">
-      <v-layout row align-end justify-center fill-height>
+      <v-layout row align-center justify-center fill-height>
         <v-flex md8 v-if="pause" @click="stop" >
             <v-img :src="require('../assets/play.svg')" class="play" contain aspect-ratio="1"/>
         </v-flex>
@@ -15,7 +15,7 @@
         <v-flex md6 pa-2 class="" style="border-bottom: black solid 2px;text-align:center;">
           {{ metadata.artist }} - {{ metadata.title }}  {{ metadata.album }}
         </v-flex>
-        <v-flex md6>
+        <v-flex md4>
           <v-layout row fill-height align-space-between justify-space-between>
             <v-flex md6 pa-2 style="border-right: black solid 1px;">
               <v-slider
