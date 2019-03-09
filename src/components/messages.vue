@@ -3,7 +3,7 @@
     <v-flex md12 ma-1 pa-0 flexbox>
       <div :style="{ textAlign: align }" >
         <div style="padding-right: 3em;padding-left:3em;">
-        <h2 class="red--text">{{messages.auteur}}</h2>
+        <h3 class="red--text">{{messages.auteur}}</h3>
           <p style="padding-right: 1em;">{{messages.text}}</p>
         </div>
       </div>

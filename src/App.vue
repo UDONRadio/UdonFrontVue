@@ -100,6 +100,7 @@ export default {
   width: 100%;
   background-color: #def2fd;
   overflow:hidden;
+
   .container{
     height: 100%;
   }

@@ -68,7 +68,7 @@ export default {
     getArtist: function () {
       const proxyurl = 'https://cors-anywhere.herokuapp.com/'
       const url = 'https://udonradio.fr/api/radio/song/played'
-      fetch(url, { mode: 'cors', headers: { 'Access-Control-Allow-Origin': '*' } })
+      fetch(proxyurl + url, { mode: 'cors', headers: { 'Access-Control-Allow-Origin': '*' } })
         .then((response) => response.json())
         .then((data) => {
           console.log(data)

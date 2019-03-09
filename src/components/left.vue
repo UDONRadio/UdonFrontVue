@@ -49,7 +49,7 @@ export default {
 #month{
   pointer-events: none;
   position:absolute;
-  bottom:66vh;
+  bottom:68vh;
   left:5vw;
   font-size:2vh;
   transform: rotate(-7deg);
@@ -57,7 +57,7 @@ export default {
 #day{
   pointer-events: none;
   position:absolute;
-  bottom: 55vh;
+  bottom: 56vh;
   left: 7vw;
   font-size: 8vh;
   transform: rotate(-4deg);
