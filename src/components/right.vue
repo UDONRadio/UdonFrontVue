@@ -9,12 +9,12 @@
 
     </v-flex>
     <v-flex md4>
-      <a href="https://www.mixcloud.com/UDONradio/">
-        <v-img :src="require('../assets/cassette.svg')" contain aspect-ratio="1"/>
-      </a>
-      <!--<router-link :to="{ path: 'replays', params: { userId: '123' } }">-->
+      <!--<a href="https://www.mixcloud.com/UDONradio/">-->
         <!--<v-img :src="require('../assets/cassette.svg')" contain aspect-ratio="1"/>-->
-      <!--</router-link>-->
+      <!--</a>-->
+      <router-link :to="{ path: 'replays', params: { userId: '123' } }">
+        <v-img :src="require('../assets/cassette.svg')" contain aspect-ratio="1"/>
+      </router-link>
     </v-flex>
   </v-layout>
 </template>

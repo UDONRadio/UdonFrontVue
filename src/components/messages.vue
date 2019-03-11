@@ -4,10 +4,10 @@
       <div :style="{ textAlign: align }" >
         <div style="padding-right: 3em;padding-left:3em;">
         <h3 class="red--text">{{messages.auteur}}</h3>
-          <p style="padding-right: 1em;">{{messages.text}}</p>
+          <p style="padding-right: 1em;" class="text-wrap">{{messages.text}}</p>
         </div>
       </div>
-      <div style="border-bottom: black solid 1px; margin-left: 2em;margin-right: 2em;">
+      <div style="border-bottom: black solid 1px; margin-left: 2em;margin-right: 2em;" class="elevation-4">
 
       </div>
     </v-flex>

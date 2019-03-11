@@ -26,7 +26,7 @@ export default {
   name: 'infobox',
   data () {
     return {
-      active: 1
+      active: 3
     }
   }
 }

@@ -14,6 +14,7 @@
           <v-layout row fill-height justify-center aligne-center style="border-top: solid black 1px;">
               <v-flex md10>
                 <v-text-field
+                    required
                     solo
                     flat
                     v-model="texte"
@@ -58,13 +59,15 @@ export default {
   },
   methods: {
     send () {
-      let messagebis = {
-        auteur: this.$store.state.user.username,
-        text: this.texte,
-        align: 'right'
+      if (this.texte) {
+        let messagebis = {
+          auteur: this.$store.state.user.username,
+          text: this.texte,
+          align: 'right'
+        }
+        message.create(messagebis)
+        this.texte = ''
       }
-      message.create(messagebis)
-      this.texte = ''
     }
   }
 }

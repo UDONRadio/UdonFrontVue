@@ -1,16 +1,19 @@
 <template>
   <div class="text-center-md" id="login">
-    <v-btn
-      color="red lighten-2"
-      @click.stop="logout()"
-      v-if="$store.state.user.logged"
-    >
-      {{$store.state.user.username}}
-    </v-btn>
+    <form name="userData" method="post" action="http://localhost:8080/login">
+      <input type="text" :value="$store.user.jwt" v-if="false">
+      <v-btn
+        color="red lighten-2"
+        v-if="$store.state.user.logged"
+        @click.stop="Go"
+      >
+        {{$store.state.user.username}}
+      </v-btn>
+    </form>
     <v-btn
       color="red lighten-2"
       @click.stop="dialog = true"
-      v-else
+      v-if="!$store.state.user.logged"
     >
       {{$store.state.user.username}}
     </v-btn>
@@ -34,11 +37,13 @@
                 label="email"
                 v-model="email"
                 type="email"
+                required
               ></v-text-field>
               <v-text-field
                 label="password"
                 v-model="password"
                 type="password"
+                required
               ></v-text-field>
               <v-divider></v-divider>
               <v-card-actions>
@@ -107,6 +112,7 @@
 
 <script>
 import { client, user } from '../services/index.js'
+import { router } from '../main.js'
 
 export default {
   name: 'login',
@@ -151,6 +157,9 @@ export default {
     },
     logout () {
       client.logout()
+    },
+    Go () {
+      document.userData.submit()
     }
   },
   computed: {
